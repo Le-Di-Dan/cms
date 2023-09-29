@@ -12,12 +12,14 @@ app.use(bodyParser.json());
 app.use(express.static("static"));
 
 app.get("/", (req, res) => {
+  res.set("Cache-Control", "no-store");
   res.sendFile(path.resolve(__dirname, "./html/home.html"), (err) =>
     console.log(err)
   );
 });
 
 app.get("/login", (req, res) => {
+  res.set("Cache-Control", "no-store");
   res.sendFile(path.resolve(__dirname, "./html/login.html"), (err) => {
     if (err) {
       console.log(err);
@@ -44,6 +46,27 @@ app.post("/login", (req, res) => {
       res.status(401).json({ message: "Unauthenticated" });
     }
   } catch (error) {}
+});
+
+app.get("/view-content", (req, res) => {
+  res.set("Cache-Control", "no-store");
+  res.sendFile(path.resolve(__dirname, "./html/view-content.html"), (err) =>
+    console.log(err)
+  );
+});
+
+app.get("/add-content", (req, res) => {
+  res.set("Cache-Control", "no-store");
+  res.sendFile(path.resolve(__dirname, "./html/add-content.html"), (err) =>
+    console.log(err)
+  );
+});
+
+app.get("/edit-profile", (req, res) => {
+  res.set("Cache-Control", "no-store");
+  res.sendFile(path.resolve(__dirname, "./html/edit-profile.html"), (err) =>
+    console.log(err)
+  );
 });
 
 const port = process.env.port || 3000;
