@@ -9,6 +9,15 @@
   font-family: "Heebo", sans-serif !important;
 }
 
+.btn.btn-success {
+  font-size: 17px !important;
+  font-weight: 500 !important;
+  text-align: center !important;
+  padding-top: 9px !important;
+  padding-bottom: 12px !important;
+  margin-bottom: 0 !important;
+}
+
 html,
 body,
 div,

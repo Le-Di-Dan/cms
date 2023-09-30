@@ -103,7 +103,7 @@
                 <h3 class="text-primary">View contents</h3>
               </a>
             </li>
-            <li class="sidebar__item active">
+            <li class="sidebar__item">
               <a href="/add-content" class="d-flex align-items-center">
                 <img
                   src="/images/icon_form.png"
@@ -119,36 +119,48 @@
         </aside>
         <aside class="content">
           <h2 class="content__heading">Edit Profile</h2>
-          <form action="#" class="form" id="formAddContent">
+          <form action="#" class="form" id="formEditProfile">
             <h3 class="form__heading">Profile Form Elements</h3>
             <div class="wrap-inputs">
               <div class="form-group d-flex flex-column-reverse mb-4">
                 <input type="text" class="form-control mt-1" id="firstname" />
-                <div class="invalid-feedback">Password is incorrect</div>
+                <div class="invalid-feedback">
+                  The length of first name is invalid (3 - 30 chars)
+                </div>
                 <label for="firstname">First name</label>
               </div>
               <div class="form-group d-flex flex-column-reverse mb-4">
                 <input type="text" class="form-control mt-1" id="lastname" />
-                <div class="invalid-feedback">Password is incorrect</div>
+                <div class="invalid-feedback">
+                  The length of last name is invalid (3 - 30 chars)
+                </div>
                 <label for="lastname">Last name</label>
               </div>
               <div class="form-group d-flex flex-column-reverse mb-4">
                 <input type="text" class="form-control mt-1" id="phone" />
-                <div class="invalid-feedback">Password is incorrect</div>
+                <div class="invalid-feedback">
+                  The length of phone number is invalid (9 - 13 digs)
+                </div>
                 <label for="phone">Phone</label>
               </div>
               <div class="form-group d-flex flex-column-reverse mb-4">
                 <textarea
                   class="form-control mt-1"
-                  id="brief"
+                  id="description"
                   style="height: 100px"
                 ></textarea>
-                <div class="invalid-feedback">Password is incorrect</div>
+                <div class="invalid-feedback">
+                  The length of description is invalid (0 - 200 chars)
+                </div>
                 <label for="description">Description</label>
               </div>
               <div class="actions mt-4">
-                <div class="btn btn-success mt-1 mr-4">Submit Button</div>
-                <div class="btn btn-success mt-1 ml-1">Reset Button</div>
+                <button type="submit" class="btn btn-success mt-1 mr-4">
+                  Submit Button
+                </button>
+                <button type="reset" class="btn btn-success mt-1 ml-1">
+                  Reset Button
+                </button>
               </div>
             </div>
           </form>
@@ -159,6 +171,8 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/js/auth.js"></script>
+    <script src="/js/utils/validator.js"></script>
     <script src="/js/layouts/header.js"></script>
+    <script src="/js/edit-profile.js"></script>
   </body>
 </html>

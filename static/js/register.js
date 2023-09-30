@@ -5,11 +5,11 @@ const registerData = {
   rePassword: "",
 };
 
-const usernamePattern = /^[a-zA-Z][a-zA-Z0-9\s]{4,49}$/;
+const usernamePattern = /^[a-zA-Z][a-zA-Z0-9\s]{2,29}$/;
 
 const emailPattern =
   /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-const passwordPattern = /^[a-zA-Z0-9]{8}$/;
+const passwordPattern = /^[a-zA-Z0-9]{8, 30}$/;
 
 const formRegister = document.getElementById("formRegister");
 
@@ -58,33 +58,35 @@ formRegister.addEventListener("submit", async (e) => {
   inputEmail.classList.add(emailIsValid ? "is-valid" : "is-invalid");
   inputPassword.classList.add(passwordIsValid ? "is-valid" : "is-invalid");
   inputRePassword.classList.add(rePasswordIsValid ? "is-valid" : "is-invalid");
-  try {
-    const response = await fetch("http://localhost:3000/register", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(registerData),
-    });
-    if (response.ok) {
-      $message(
-        {
-          type: "success",
-          message: `
-            <strong>Congratulation!</strong> You successfully create a new account.
-          `,
-          duration: 3500,
+  if (usernameIsValid && emailIsValid && passwordIsValid && rePasswordIsValid) {
+    try {
+      const response = await fetch("http://localhost:3000/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
-        () => location.assign("/login")
-      );
-    } else {
-      $message({
-        type: "danger",
-        message: `
-            <strong>Oops!</strong> Something went wrong.
-          `,
-        duration: 3500,
+        body: JSON.stringify(registerData),
       });
-    }
-  } catch (error) {}
+      if (response.ok) {
+        $message(
+          {
+            type: "success",
+            message: `
+              <strong>Congratulation!</strong> You successfully create a new account.
+            `,
+            duration: 3500,
+          },
+          () => location.assign("/login")
+        );
+      } else {
+        $message({
+          type: "danger",
+          message: `
+              <strong>Oops!</strong> Something went wrong.
+            `,
+          duration: 3500,
+        });
+      }
+    } catch (error) {}
+  }
 });

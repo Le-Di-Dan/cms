@@ -100,6 +100,50 @@ app.get("/add-content", (req, res) => {
   );
 });
 
+app.post("/content", (req, res) => {
+  const { title, brief, content } = req.body;
+  const file = path.resolve(__dirname, "./storage/contents.json");
+  let contents = fs.readFileSync(file, { encoding: "utf-8" });
+  contents = JSON.parse(contents || "[]");
+  const d = new Date();
+  const date = d.getDate();
+  const month = d.getMonth() + 1;
+  const year = d.getFullYear();
+  let hours = d.getHours();
+  if (hours < 10) {
+    hours = "0" + hours;
+  }
+  let minutes = d.getMinutes();
+  if (minutes < 10) {
+    minutes = "0" + minutes;
+  }
+  const created_on = `${date}/${month}/${year} ${hours}:${minutes}`;
+  const newContent = { id: contents.length, title, brief, content, created_on };
+  contents = [...contents, newContent];
+  fs.writeFile(file, JSON.stringify(contents), { encoding: "utf-8" }, (err) => {
+    if (err) {
+      console.log(err);
+    }
+  });
+  res.status(201).json({
+    message: "success",
+    data: [newContent],
+  });
+});
+
+app.get("/content", (req, res) => {
+  const file = path.resolve(__dirname, "./storage/contents.json");
+  let contents = fs.readFileSync(file, { encoding: "utf-8" });
+  contents = JSON.parse(contents || "[]");
+  const timeOut = setTimeout(() => {
+    res.status(200).json({
+      message: "success",
+      data: contents,
+    });
+    clearTimeout(timeOut);
+  }, 5000);
+});
+
 app.get("/edit-profile", (req, res) => {
   res.set("Cache-Control", "no-store");
   res.sendFile(path.resolve(__dirname, "./html/edit-profile.html"), (err) =>

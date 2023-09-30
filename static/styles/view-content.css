@@ -1,3 +1,8 @@
+.content .loading {
+  font-size: 30px;
+  line-height: 1;
+  font-weight: 500;
+}
 .content .content__heading {
   font-size: 30px;
   line-height: 1;

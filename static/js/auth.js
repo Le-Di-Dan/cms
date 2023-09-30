@@ -1,4 +1,4 @@
-let isLoggedIn = localStorage.getItem("isLoggedIn") ?? 0;
+let isLoggedIn = sessionStorage.getItem("isLoggedIn") ?? 0;
 isLoggedIn = +isLoggedIn;
 
 const AuthWrapper = document.getElementById("need-auth");
