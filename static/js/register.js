@@ -67,9 +67,24 @@ formRegister.addEventListener("submit", async (e) => {
       body: JSON.stringify(registerData),
     });
     if (response.ok) {
-      location.assign("/login");
+      $message(
+        {
+          type: "success",
+          message: `
+            <strong>Congratulation!</strong> You successfully create a new account.
+          `,
+          duration: 3500,
+        },
+        () => location.assign("/login")
+      );
     } else {
-      alert("Register Failed");
+      $message({
+        type: "danger",
+        message: `
+            <strong>Oops!</strong> Something went wrong.
+          `,
+        duration: 3500,
+      });
     }
   } catch (error) {}
 });

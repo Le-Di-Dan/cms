@@ -22,7 +22,6 @@ inputPassword.addEventListener("input", (e) => {
 });
 
 formLogin.addEventListener("submit", async (e) => {
-  debugger;
   e.preventDefault();
   const emailIsValid = VALIDATOR.match(loginData.email, emailPattern);
   const passwordIsValid = VALIDATOR.match(loginData.password, passwordPattern);
@@ -39,10 +38,27 @@ formLogin.addEventListener("submit", async (e) => {
         body: JSON.stringify(loginData),
       });
       if (response.ok) {
-        localStorage.setItem("isLoggedIn", "1");
-        location.assign("/");
+        $message(
+          {
+            type: "success",
+            message: `
+              <strong>Congratulation!</strong> You successfully log into your account .
+            `,
+            duration: 3500,
+          },
+          () => {
+            localStorage.setItem("isLoggedIn", "1");
+            location.assign("/");
+          }
+        );
       } else {
-        alert("Login Failed");
+        $message({
+          type: "danger",
+          message: `
+              <strong>Oops!</strong> Your login credentials are invalid.
+            `,
+          duration: 3500,
+        });
       }
     } catch (error) {
       console.log(error);

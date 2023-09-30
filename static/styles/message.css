@@ -1,0 +1,31 @@
+.message-box {
+  position: fixed;
+  z-index: 100;
+  top: -100px;
+  left: 0;
+  width: 100vw;
+  height: 100px;
+  padding: 40px;
+  display: grid;
+  place-items: center;
+}
+
+.message-box.show {
+  animation-name: messageAnimation;
+  animation-timing-function: cubic-bezier(0.1, -0.6, 0.2, 0);
+}
+
+@keyframes messageAnimation {
+  0% {
+    top: -100px;
+  }
+  30% {
+    top: 0px;
+  }
+  70% {
+    top: 0px;
+  }
+  100% {
+    top: -100px;
+  }
+}
