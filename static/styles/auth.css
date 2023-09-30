@@ -2,37 +2,42 @@ body {
   min-height: 100vh;
 }
 
+.wrapper {
+  width: 1312px;
+  margin: 0 auto;
+}
+
 .form {
   border-radius: 8px;
   padding: 0;
   overflow: hidden;
   border: 0.8px solid #e3e3e3;
 }
-.form .form__heading[data-form="formLogin"] {
-  padding: 12.29px 20.87px 17.91px;
-  font-size: 21.68px;
+.form .form__heading {
+  padding: 12px 22px 18px;
+  font-size: 22px;
   font-weight: 400;
-  line-height: 26.12px;
+  line-height: 26px;
   color: rgba(0, 0, 0, 0.65);
   background-color: #d9d9d9;
 }
 
-.form .formLogin {
+.form .formAuth {
   padding: 45px 28px;
 }
 
-.form .formLogin .form-control {
+.form .formAuth .form-control {
   height: auto;
   padding: 13px 21px;
   margin-bottom: 22px;
   box-shadow: 0px 2px 4px 1px #00000040;
 }
 
-.form .formLogin .form-control::placeholder {
+.form .formAuth .form-control::placeholder {
   color: #d9d9d9;
 }
 
-.formLogin .btn.btn-success[type="submit"] {
+.form .formAuth .btn.btn-success[type="submit"] {
   height: auto;
   padding-top: 15px;
   padding-bottom: 15px;
@@ -42,7 +47,7 @@ body {
   margin-bottom: 22px;
 }
 
-.formLogin .btn.btn-link {
+.form .formAuth .btn.btn-link {
   color: #155fee;
 }
 
@@ -58,14 +63,9 @@ body {
   aspect-ratio: 1;
 }
 
-.form .form-check-input:checked {
-  background-color: red !important;
-}
-
-[data-validate="false"] ~ .invalid-feedback {
-  display: block;
-}
-
-[data-validate="false"] {
-  border-color: #dc3545;
+.form-group .invalid-feedback {
+  margin: 0 0 4px;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 400;
 }

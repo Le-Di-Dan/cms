@@ -22,6 +22,7 @@ inputPassword.addEventListener("input", (e) => {
 });
 
 formLogin.addEventListener("submit", async (e) => {
+  debugger;
   e.preventDefault();
   const emailIsValid = VALIDATOR.match(loginData.email, emailPattern);
   const passwordIsValid = VALIDATOR.match(loginData.password, passwordPattern);

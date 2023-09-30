@@ -19,6 +19,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
   <link rel="stylesheet" href="/styles/reset.css" />
   <link rel="stylesheet" href="/styles/home.css" />
+  <link rel="stylesheet" href="/styles/add-content.css" />
   <body>
     <div class="wrapper" id="need-auth">
       <header class="header">
@@ -119,7 +120,42 @@
             </li>
           </ul>
         </aside>
-        <aside class="content"></aside>
+        <aside class="content">
+          <h2 class="content__heading">Edit Profile</h2>
+          <form action="#" class="form" id="formAddContent">
+            <h3 class="form__heading">Profile Form Elements</h3>
+            <div class="wrap-inputs">
+              <div class="form-group d-flex flex-column-reverse mb-4">
+                <input type="text" class="form-control mt-1" id="firstname" />
+                <div class="invalid-feedback">Password is incorrect</div>
+                <label for="firstname">First name</label>
+              </div>
+              <div class="form-group d-flex flex-column-reverse mb-4">
+                <input type="text" class="form-control mt-1" id="lastname" />
+                <div class="invalid-feedback">Password is incorrect</div>
+                <label for="lastname">Last name</label>
+              </div>
+              <div class="form-group d-flex flex-column-reverse mb-4">
+                <input type="text" class="form-control mt-1" id="phone" />
+                <div class="invalid-feedback">Password is incorrect</div>
+                <label for="phone">Phone</label>
+              </div>
+              <div class="form-group d-flex flex-column-reverse mb-4">
+                <textarea
+                  class="form-control mt-1"
+                  id="brief"
+                  style="height: 100px"
+                ></textarea>
+                <div class="invalid-feedback">Password is incorrect</div>
+                <label for="description">Description</label>
+              </div>
+              <div class="actions mt-4">
+                <div class="btn btn-success mt-1 mr-4">Submit Button</div>
+                <div class="btn btn-success mt-1 ml-1">Reset Button</div>
+              </div>
+            </div>
+          </form>
+        </aside>
       </main>
     </div>
     <script src="/js/auth.js"></script>

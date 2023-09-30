@@ -27,6 +27,44 @@ app.get("/login", (req, res) => {
   });
 });
 
+app.get("/register", (req, res) => {
+  res.set("Cache-Control", "no-store");
+  res.sendFile(path.resolve(__dirname, "./html/register.html"), (err) => {
+    if (err) {
+      console.log(err);
+    }
+  });
+});
+
+app.post("/register", (req, res) => {
+  const { username, email, password } = req.body;
+  let users = fs.readFileSync(path.resolve(__dirname, "./storage/users.json"), {
+    encoding: "utf-8",
+  });
+  users = JSON.parse(users || "[]") || [];
+  const isExisted = users.find(
+    (user) => user.username === username && user.email === email
+  );
+  if (isExisted) {
+    res.status(400).json({ message: "Account is existed" });
+  } else {
+    res.status(201).json({ message: "success" });
+    fs.writeFile(
+      path.resolve(__dirname, "./storage/users.json"),
+      JSON.stringify([
+        ...users,
+        { id: users.length, username, password, email },
+      ]),
+      { encoding: "utf-8" },
+      (err) => {
+        if (err) {
+          console.log(err);
+        }
+      }
+    );
+  }
+});
+
 app.post("/login", (req, res) => {
   const { email, password } = req.body;
   try {

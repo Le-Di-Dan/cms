@@ -97,9 +97,8 @@
 .body .content {
   margin-top: 90px;
   margin-left: 325px;
-  height: calc(200vh - 90px);
+  /* height: calc(200vh - 90px); */
   width: calc(100% - 325px);
   padding: 65px 65px 0;
-  background-color: red;
   background-clip: content-box;
 }
