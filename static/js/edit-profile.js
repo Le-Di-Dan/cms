@@ -5,7 +5,7 @@ let formData = {
   description: "",
 };
 
-const phonePattern = /^0\d{8, 12}$/;
+const phonePattern = /^0\d{8,12}$/;
 
 const formEditProfile = document.getElementById("formEditProfile");
 const inputFirstName = document.getElementById("firstname");
@@ -59,12 +59,12 @@ formEditProfile.addEventListener("submit", async (e) => {
       {
         type: "success",
         message: `
-                  <strong>Congratulation!</strong> You successfully add new content.
+                  <strong>Congratulation!</strong> You successfully edit profile.
                 `,
         duration: 3500,
       },
       () => {
-        location.assign("/view-content");
+        location.assign("/");
       }
     );
   }
