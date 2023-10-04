@@ -7,29 +7,27 @@ let formData = {
 
 const phonePattern = /^0\d{8,12}$/;
 
-const formEditProfile = document.getElementById("formEditProfile");
-const inputFirstName = document.getElementById("firstname");
-const inputLastName = document.getElementById("lastname");
-const inputPhone = document.getElementById("phone");
-const inputDescription = document.getElementById("description");
-
-inputFirstName.addEventListener("input", (e) => {
+$("#firstname").on("input",  (e) => {
   formData.first_name = e.target.value;
-});
-
-inputLastName.addEventListener("input", (e) => {
+})
+$("#lastname").on("input", (e) => {
   formData.last_name = e.target.value;
-});
-
-inputPhone.addEventListener("input", (e) => {
+})
+$("#phone").on("input", (e) => {
   formData.phone = e.target.value;
-});
-
-inputDescription.addEventListener("input", (e) => {
+})
+$("#description").on("input", (e) => {
   formData.description = e.target.value;
-});
+})
 
-formEditProfile.addEventListener("submit", async (e) => {
+const handleResetClasses = () => {
+  $("#firstname").removeClass("is-valid", "is-invalid")
+  $("#lastname").removeClass("is-valid", "is-invalid")
+  $("#phone").removeClass("is-valid", "is-invalid")
+  $("#description").removeClass("is-valid", "is-invalid")
+}
+
+$("#formEditProfile").on("submit", async (e) => {
   e.preventDefault();
   const firstNameIsValid =
     VALIDATOR.minLength(formData.first_name, 3) &&
@@ -39,15 +37,13 @@ formEditProfile.addEventListener("submit", async (e) => {
     VALIDATOR.maxLength(formData.last_name, 30);
   const phoneIsValid = VALIDATOR.match(formData.phone, phonePattern);
   const descriptionIsValid = VALIDATOR.maxLength(formData.description, 200);
-  inputFirstName.classList.remove("is-valid", "is-invalid");
-  inputLastName.classList.remove("is-valid", "is-invalid");
-  inputPhone.classList.remove("is-valid", "is-invalid");
-  inputDescription.classList.remove("is-valid", "is-invalid");
 
-  inputFirstName.classList.add(firstNameIsValid ? "is-valid" : "is-invalid");
-  inputLastName.classList.add(lastNameIsValid ? "is-valid" : "is-invalid");
-  inputPhone.classList.add(phoneIsValid ? "is-valid" : "is-invalid");
-  inputDescription.classList.add(inputDescription ? "is-valid" : "is-invalid");
+  handleResetClasses()
+
+  $("#firstname").addClass(firstNameIsValid ? "is-valid" : "is-invalid");
+  $("#lastname").addClass(lastNameIsValid ? "is-valid" : "is-invalid");
+  $("#phone").addClass(phoneIsValid ? "is-valid" : "is-invalid");
+  $("#description").addClass(descriptionIsValid ? "is-valid" : "is-invalid");
 
   if (
     firstNameIsValid &&
@@ -68,13 +64,10 @@ formEditProfile.addEventListener("submit", async (e) => {
       }
     );
   }
-});
+})
 
-formEditProfile.addEventListener("reset", () => {
-  inputFirstName.classList.remove("is-valid", "is-invalid");
-  inputLastName.classList.remove("is-valid", "is-invalid");
-  inputPhone.classList.remove("is-valid", "is-invalid");
-  inputDescription.classList.remove("is-valid", "is-invalid");
+$("#formEditProfile").on("reset", () => {
+  handleResetClasses()
   formData = {
     first_name: "",
     last_name: "",
@@ -85,4 +78,4 @@ formEditProfile.addEventListener("reset", () => {
   inputLastName.value = "";
   inputPhone.value = "";
   inputDescription.value = "";
-});
+})

@@ -1,5 +1,3 @@
-const contentPlaceHolder = document.getElementById("contentPlaceholder");
-
 let innerHtml = `<div class="content__heading">View Content</div>
 <div class="tableWrapper">
   <h3 class="tableWrapper__heading">View Content List</h3>
@@ -54,7 +52,7 @@ async function loadContent() {
       }, "");
       innerHtml = innerHtml.replace("{{render}}", tableContent);
 
-      contentPlaceHolder.innerHTML = innerHtml;
+      $("#contentPlaceholder").html(innerHtml);
     }
   } catch (error) {}
 }

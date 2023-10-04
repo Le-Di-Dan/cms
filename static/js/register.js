@@ -13,28 +13,27 @@ const passwordPattern = /^[a-zA-Z0-9]{8,30}$/;
 
 const formRegister = document.getElementById("formRegister");
 
-const inputUsername = document.getElementById("username");
-const inputEmail = document.getElementById("email");
-const inputPassword = document.getElementById("password");
-const inputRePassword = document.getElementById("re_password");
-
-inputUsername.addEventListener("input", (e) => {
+$("#username").on("input", (e) => {
   registerData.username = e.target.value;
-});
-
-inputEmail.addEventListener("input", (e) => {
+})
+$("#email").on("input", (e) => {
   registerData.email = e.target.value;
-});
-
-inputPassword.addEventListener("input", (e) => {
+})
+$("#password").on("input", (e) => {
   registerData.password = e.target.value;
-});
-
-inputRePassword.addEventListener("input", (e) => {
+})
+$("#re_password").on("input", (e) => {
   registerData.rePassword = e.target.value;
-});
+})
 
-formRegister.addEventListener("submit", async (e) => {
+const handleResetClasses = () => {
+  $("#username").removeClass("is-valid", "is-invalid");
+  $("#email").removeClass("is-valid", "is-invalid");
+  $("#password").removeClass("is-valid", "is-invalid");
+  $("#re_password").removeClass("is-valid", "is-invalid");
+}
+
+$("#formRegister").on("submit", async (e) => {
   e.preventDefault();
   const usernameIsValid = VALIDATOR.match(
     registerData.username,
@@ -48,16 +47,13 @@ formRegister.addEventListener("submit", async (e) => {
   const rePasswordIsValid =
     registerData.rePassword === registerData.password &&
     VALIDATOR.match(registerData.rePassword, passwordPattern);
+  handleResetClasses()
 
-  inputUsername.classList.remove("is-valid", "is-invalid");
-  inputEmail.classList.remove("is-valid", "is-invalid");
-  inputPassword.classList.remove("is-valid", "is-invalid");
-  inputRePassword.classList.remove("is-valid", "is-invalid");
+  $("#username").addClass(usernameIsValid ? "is-valid" : "is-invalid");
+  $("#email").addClass(emailIsValid ? "is-valid" : "is-invalid");
+  $("#password").addClass(passwordIsValid ? "is-valid" : "is-invalid");
+  $("#re_password").addClass(rePasswordIsValid ? "is-valid" : "is-invalid");
 
-  inputUsername.classList.add(usernameIsValid ? "is-valid" : "is-invalid");
-  inputEmail.classList.add(emailIsValid ? "is-valid" : "is-invalid");
-  inputPassword.classList.add(passwordIsValid ? "is-valid" : "is-invalid");
-  inputRePassword.classList.add(rePasswordIsValid ? "is-valid" : "is-invalid");
   if (usernameIsValid && emailIsValid && passwordIsValid && rePasswordIsValid) {
     try {
       const response = await fetch("http://localhost:3000/register", {

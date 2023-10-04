@@ -9,19 +9,23 @@ const inputTitle = document.getElementById("title");
 const inputBrief = document.getElementById("brief");
 const inputContent = document.getElementById("content");
 
-inputTitle.addEventListener("input", (e) => {
+$("#title").on("input", (e) => {
   formData.title = e.target.value;
-});
-
-inputBrief.addEventListener("input", (e) => {
+})
+$("#brief").on("input", (e) => {
   formData.brief = e.target.value;
-});
-
-inputContent.addEventListener("input", (e) => {
+})
+$("#content").on("input", (e) => {
   formData.content = e.target.value;
-});
+})
 
-formAddContent.addEventListener("submit", async (e) => {
+const handleResetClasses = () => {
+  $("#title").removeClass("is-invalid", "is-valid")
+  $("#brief").removeClass("is-invalid", "is-valid")
+  $("#content").removeClass("is-invalid", "is-valid")
+}
+
+$("#formAddContent").on("submit", async (e) => {
   e.preventDefault();
   const titleIsValid =
     VALIDATOR.minLength(formData.title, 10) &&
@@ -33,13 +37,11 @@ formAddContent.addEventListener("submit", async (e) => {
     VALIDATOR.minLength(formData.content, 50) &&
     VALIDATOR.maxLength(formData.content, 1000);
 
-  inputTitle.classList.remove("is-valid", "is-invalid");
-  inputBrief.classList.remove("is-valid", "is-invalid");
-  inputContent.classList.remove("is-valid", "is-invalid");
+  handleResetClasses()
 
-  inputTitle.classList.add(titleIsValid ? "is-valid" : "is-invalid");
-  inputBrief.classList.add(briefIsValid ? "is-valid" : "is-invalid");
-  inputContent.classList.add(contentIsValid ? "is-valid" : "is-invalid");
+  $("#title").addClass(titleIsValid ? "is-valid" : "is-invalid");
+  $("#brief").addClass(briefIsValid ? "is-valid" : "is-invalid");
+  $("#content").addClass(contentIsValid ? "is-valid" : "is-invalid");
 
   if (titleIsValid && briefIsValid && contentIsValid) {
     try {
@@ -76,10 +78,8 @@ formAddContent.addEventListener("submit", async (e) => {
   }
 });
 
-formAddContent.addEventListener("reset", () => {
-  inputTitle.classList.remove("is-valid", "is-invalid");
-  inputBrief.classList.remove("is-valid", "is-invalid");
-  inputContent.classList.remove("is-valid", "is-invalid");
+$("#formAddContent").on("reset", () => {
+  handleResetClasses()
   formData = {
     title: "",
     brief: "",

@@ -9,7 +9,7 @@ if (location.href.includes("/login") || location.href.includes("/register")) {
   }
 } else {
   if (isLoggedIn) {
-    AuthWrapper.classList.remove("auth");
+    $("#need-auth").removeClass("auth");
   } else {
     location.assign("/login");
   }

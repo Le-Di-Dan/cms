@@ -8,29 +8,27 @@ const emailPattern =
   /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const passwordPattern = /^[a-zA-Z0-9]{8,30}$/;
 
-const formLogin = document.getElementById("formLogin");
-const inputEmail = document.getElementById("email");
-const inputPassword = document.getElementById("pwd");
-const inputRemember = document.getElementById("remember");
-
-inputEmail.addEventListener("input", (e) => {
+$("#email").on("input", (e) => {
   loginData.email = e.target.value;
-});
-
-inputPassword.addEventListener("input", (e) => {
+})
+$("#password").on("input", (e) => {
   loginData.password = e.target.value;
-});
+})
 
-formLogin.addEventListener("submit", async (e) => {
+const handleResetClasses = () => {
+  $("#email").removeClass("is-valid", "is-invalid");
+  $("#password").removeClass("is-valid", "is-invalid");
+}
+
+$("#formLogin").on("submit", async (e) => {
   e.preventDefault();
   const emailIsValid = VALIDATOR.match(loginData.email, emailPattern);
   const passwordIsValid = VALIDATOR.match(loginData.password, passwordPattern);
 
-  inputEmail.classList.remove("is-valid", "is-invalid");
-  inputPassword.classList.remove("is-valid", "is-invalid");
+  handleResetClasses()
 
-  inputEmail.classList.add(emailIsValid ? "is-valid" : "is-invalid");
-  inputPassword.classList.add(passwordIsValid ? "is-valid" : "is-invalid");
+  $("#email").addClass(emailIsValid ? "is-valid" : "is-invalid");
+  $("#password").addClass(passwordIsValid ? "is-valid" : "is-invalid");
   if (emailIsValid && passwordIsValid) {
     try {
       const response = await fetch("http://localhost:3000/login", {
